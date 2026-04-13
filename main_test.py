@@ -1,12 +1,10 @@
 
 from selenium.webdriver.chrome.options import Options
-from aws_main import monitor_and_solve_security
+from aws_main import  CaptchaHandler
 from enter_data import process_account_creation
 
 import undetected_chromedriver as uc
 
-# Инициализация решателя
-API_KEY = "You API KEY 2CAPTCHA"
 
 
 def main():
@@ -26,8 +24,8 @@ def main():
     driver.implicitly_wait(30)
     driver.get("https://aws.amazon.com")
     process_account_creation(driver)
-    monitor_and_solve_security(driver=driver, API_KEY ="8ee4154894c32e4ace94ed1d20209719", sear_captha=False)
-
+    captcha_manager = CaptchaHandler(driver, api_key="2captchaAPIKEY")
+    captcha_manager.solve_security_check(single_run=False)
     input("Enter to continue...")
 
 
